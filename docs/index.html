@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustEstate | Find Your Dream Property</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="#"><span>Trust</span>Estate</a>
+            </div>
+            <nav class="navbar">
+                <a href="#home">Home</a>
+                <a href="#properties">Properties</a>
+                <a href="#agents">Agents</a>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="icons">
+                <div id="menu-btn" class="fas fa-bars"></div>
+                <div id="login-btn" class="fas fa-user"></div>
+                <div id="search-btn" class="fas fa-search"></div>
+            </div>
+            <div>
+        </div>
+    </header>
+
+    <!-- Login Form -->
+    <div class="login-form-container">
+        <span class="fas fa-times" id="close-login-form"></span>
+        <form action="">
+            <h3>User Login</h3>
+            <input type="email" placeholder="Email" class="box">
+            <input type="password" placeholder="Password" class="box">
+            <p>Don't have an account? <a href="#">Register here</a></p>
+            <input type="submit" value="Login" class="btn">
+            <div class="social-login">
+                <p>Or login with</p>
+                <div class="social-icons">
+                    <a href="#" class="fab fa-google"></a>
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Search Form -->
+    <div class="search-form-container">
+        <span class="fas fa-times" id="close-search-form"></span>
+        <form action="">
+            <h3>Search Properties</h3>
+            <div class="search-box">
+                <input type="search" placeholder="Enter location, property type, etc...">
+                <button type="submit" class="btn">Search</button>
+            </div>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label>Property Type</label>
+                    <select>
+                        <option value="">Any</option>
+                        <option value="house">House</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="villa">Villa</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Price Range</label>
+                    <div class="price-range">
+                        <input type="range" min="0" max="1000000" value="500000" step="10000" id="price-slider">
+                        <span id="price-value">$500,000</span>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label>Bedrooms</label>
+                    <select>
+                        <option value="">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="swiper hero-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide slide" style="background: url('assets/herooo.avif') no-repeat;">
+                    <div class="content">
+                        <h3>Find Your Dream Home Today</h3>
+                        <p>Discover premium properties in the most desirable locations around the world.</p>
+                        <a href="#properties" class="btn">Browse Properties</a>
+                    </div>
+                </div>
+                <div class="swiper-slide slide" style="background: url('assets/luxury.avif') no-repeat;">
+                    <div class="content">
+                        <h3>Luxury Living Redefined</h3>
+                        <p>Exclusive high-end properties with world-class amenities and breathtaking views.</p>
+                        <a href="#properties" class="btn">Explore Luxury</a>
+                    </div>
+                </div>
+                <div class="swiper-slide slide" style="background: url('assets/invest.avif') no-repeat;">
+                    <div class="content">
+                        <h3>Investment Opportunities</h3>
+                        <p>Grow your portfolio with our carefully selected investment properties.</p>
+                        <a href="#properties" class="btn">Invest Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- Quick Search Section -->
+    <section class="quick-search">
+        <div class="container">
+            <div class="search-tabs">
+                <button class="tab-btn active" data-tab="buy">Buy</button>
+                <button class="tab-btn" data-tab="rent">Rent</button>
+                <button class="tab-btn" data-tab="sell">Sell</button>
+                <button class="tab-btn" data-tab="commercial">Commercial</button>
+            </div>
+            <div class="search-fields">
+                <div class="location-field">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" placeholder="Location (City, Neighborhood, ZIP)">
+                </div>
+                <div class="property-type">
+                    <select>
+                        <option value="">Property Type</option>
+                        <option value="house">House</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="condo">Condo</option>
+                        <option value="townhouse">Townhouse</option>
+                        <option value="land">Land</option>
+                    </select>
+                </div>
+                <div class="price-range">
+                    <select>
+                        <option value="">Price Range</option>
+                        <option value="0-100000">$0 - $100,000</option>
+                        <option value="100000-250000">$100,000 - $250,000</option>
+                        <option value="250000-500000">$250,000 - $500,000</option>
+                        <option value="500000-1000000">$500,000 - $1,000,000</option>
+                        <option value="1000000+">$1,000,000+</option>
+                    </select>
+                </div>
+                <button class="search-btn btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="featured-properties" id="properties">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Properties</h2>
+                <p>Handpicked premium properties for you</p>
+                <div class="view-all">
+                    <a href="#" class="btn">View All Properties</a>
+                </div>
+            </div>
+            <div class="property-grid">
+                <!-- Property Card 1 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="assets/villa.avif" alt="Luxury Villa">
+                        <div class="badges">
+                            <span class="featured">Featured</span>
+                            <span class="for-sale">For Sale</span>
+                        </div>
+                        <div class="actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="price">$1,250,000</div>
+                        <h3><a href="#">Luxury Villa with Ocean View</a></h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Malibu, California</span>
+                        </div>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 5 Beds</span>
+                            <span><i class="fas fa-bath"></i> 4 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 3,500 sq.ft</span>
+                        </div>
+                        <div class="footer">
+                            <div class="agent">
+                                <img src="assets/agent.avif" alt="Agent">
+                                <span>By: Sarah Johnson</span>
+                            </div>
+                            <div class="posted">2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="assets/downtown.avif" alt="Modern Apartment">
+                        <div class="badges">
+                            <span class="for-rent">For Rent</span>
+                        </div>
+                        <div class="actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="price">$3,500<span>/month</span></div>
+                        <h3><a href="#">Modern Downtown Apartment</a></h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Manhattan, New York</span>
+                        </div>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 2 Beds</span>
+                            <span><i class="fas fa-bath"></i> 2 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 1,200 sq.ft</span>
+                        </div>
+                        <div class="footer">
+                            <div class="agent">
+                                <img src="assets/agent2.avif" alt="Agent">
+                                <span>By: Michael Chen</span>
+                            </div>
+                            <div class="posted">1 week ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="assets/family.avif" alt="Family House">
+                        <div class="badges">
+                            <span class="featured">Featured</span>
+                            <span class="for-sale">For Sale</span>
+                        </div>
+                        <div class="actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="price">$750,000</div>
+                        <h3><a href="#">Spacious Family House</a></h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Austin, Texas</span>
+                        </div>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 4 Beds</span>
+                            <span><i class="fas fa-bath"></i> 3 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 2,800 sq.ft</span>
+                        </div>
+                        <div class="footer">
+                            <div class="agent">
+                                <img src="assets/agentt3.avif" alt="Agent">
+                                <span>By: David Wilson</span>
+                            </div>
+                            <div class="posted">3 days ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 4 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="assets/penthouse.avif" alt="Penthouse">
+                        <div class="badges">
+                            <span class="for-rent">For Rent</span>
+                            <span class="featured">Featured</span>
+                        </div>
+                        <div class="actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="price">$15,000<span>/month</span></div>
+                        <h3><a href="#">Luxury Penthouse Suite</a></h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Miami, Florida</span>
+                        </div>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 3 Beds</span>
+                            <span><i class="fas fa-bath"></i> 3.5 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 3,200 sq.ft</span>
+                        </div>
+                        <div class="footer">
+                            <div class="agent">
+                                <img src="assets/agent4.avif" alt="Agent">
+                                <span>By: Jessica Lee</span>
+                            </div>
+                            <div class="posted">5 days ago</div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Property Card 5 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="assets/garden.avif" alt="Penthouse">
+                        <div class="badges">
+                            <span class="for-rent">For Rent</span>
+                            <span class="featured">Featured</span>
+                        </div>
+                        <div class="actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="price">$10,000<span>/month</span></div>
+                        <h3><a href="#">Elegant Garden Duplex</a></h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Austin, Texas</span>
+                        </div>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 3 Beds</span>
+                            <span><i class="fas fa-bath"></i> 3.5 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 3,200 sq.ft</span>
+                        </div>
+                        <div class="footer">
+                            <div class="agent">
+                                <img src="assets/agentt3.avif" alt="Agent">
+                                <span>By: David Wilson</span>
+                            </div>
+                            <div class="posted">5 days ago</div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Property Card 6 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="assets/studio.avif" alt="Penthouse">
+                        <div class="badges">
+                            <span class="for-rent">For Rent</span>
+                            <span class="featured">Featured</span>
+                        </div>
+                        <div class="actions">
+                            <button class="action-btn"><i class="far fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="price">$9,000<span>/month</span></div>
+                        <h3><a href="#">Urban Studio Apartment</a></h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Miami, Florida</span>
+                        </div>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 3 Beds</span>
+                            <span><i class="fas fa-bath"></i> 3.5 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 3,200 sq.ft</span>
+                        </div>
+                        <div class="footer">
+                            <div class="agent">
+                                <img src="assets/agent2.avif" alt="Agent">
+                                <span>By: Michael Chen</span>
+                            </div>
+                            <div class="posted">5 days ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Types -->
+    <section class="property-types">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse By Property Type</h2>
+                <p>Find your perfect property based on your needs</p>
+            </div>
+            <div class="types-grid">
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Houses</h3>
+                    <p>1,234 Properties</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Apartments</h3>
+                    <p>876 Properties</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3>Commercial</h3>
+                    <p>543 Properties</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3>Villas</h3>
+                    <p>321 Properties</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3>Condos</h3>
+                    <p>654 Properties</p>
+                </div>
+    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose TrustEstate</h2>
+                <p>We provide the best service in the real estate industry</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Best Price Guarantee</h3>
+                    <p>We guarantee you'll get the best price for your property or your money back.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Trusted by Thousands</h3>
+                    <p>Over 10,000 happy customers trust us with their real estate needs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search-location"></i>
+                    </div>
+                    <h3>Premium Locations</h3>
+                    <p>We specialize in properties in the most desirable neighborhoods.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our customer service team is available around the clock to assist you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Agents Section -->
+    <section class="agents" id="agents">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Agents</h2>
+                <p>Our professional team is ready to assist you</p>
+                <div class="view-all">
+                    <a href="#" class="btn">View All Agents</a>
+                </div>
+            </div>
+            <div class="agents-grid">
+                <div class="agent-card">
+                    <div class="agent-image">
+                        <img src="assets/agent.avif" alt="Agent">
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="agent-details">
+                        <h3>Sarah Johnson</h3>
+                        <span>Senior Agent</span>
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                            <p><i class="fas fa-envelope"></i> sarah@trustestate.com</p>
+                        </div>
+                        
+                        <a href="#" class="btn">Contact Agent</a>
+                    </div>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-image">
+                        <img src="assets/agent2.avif" alt="Agent">
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="agent-details">
+                        <h3>Michael Chen</h3>
+                        <span>Luxury Specialist</span>
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> (555) 234-5678</p>
+                            <p><i class="fas fa-envelope"></i> michael@trustestate.com</p>
+                        </div>
+                       
+                        <a href="#" class="btn">Contact Agent</a>
+                    </div>
+                </div>
+                <div class="agent-card">
+                    <div class="agent-image">
+                        <img src="assets/agentt3.avif" alt="Agent">
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="agent-details">
+                        <h3>David Wilson</h3>
+                        <span>Commercial Expert</span>
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> (555) 345-6789</p>
+                            <p><i class="fas fa-envelope"></i> david@trustestate.com</p>
+                        </div>
+                       
+                        <a href="#" class="btn">Contact Agent</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive real estate solutions tailored to your needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Property Buying</h3>
+                    <p>We'll help you find and purchase your dream home with expert guidance through every step.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Property Selling</h3>
+                    <p>Maximize your property's value with our proven marketing strategies and negotiation skills.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Property Rental</h3>
+                    <p>Find the perfect rental property or list yours with our professional property management.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Commercial Real Estate</h3>
+                    <p>Expert services for office spaces, retail locations, and industrial properties.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Investment Consulting</h3>
+                    <p>Strategic advice to help you build and manage a profitable real estate portfolio.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3>Legal Services</h3>
+                    <p>Comprehensive legal support for contracts, titles, and all real estate transactions.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Blog Section -->
+    <section class="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest News & Tips</h2>
+                <p>Stay updated with real estate trends and advice</p>
+                <div class="view-all">
+                    <a href="#" class="btn">View All Articles</a>
+                </div>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/sale.avif" alt="Blog Post">
+                        <div class="blog-date">
+                            <span>15</span>
+                            <span>Jun</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> By Admin</span>
+                            <span><i class="fas fa-comments"></i> 5 Comments</span>
+                        </div>
+                        <h3><a href="#">How to Stage Your Home for a Quick Sale</a></h3>
+                        <p>Learn professional staging techniques that can help your home sell faster and for more money.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/market.avif" alt="Blog Post">
+                        <div class="blog-date">
+                            <span>02</span>
+                            <span>Jul</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> By Admin</span>
+                            <span><i class="fas fa-comments"></i> 12 Comments</span>
+                        </div>
+                        <h3><a href="#">2023 Real Estate Market Trends to Watch</a></h3>
+                        <p>Discover the key trends shaping the real estate market this year and how they might affect you.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/home.avif" alt="Blog Post">
+                        <div class="blog-date">
+                            <span>28</span>
+                            <span>Jul</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> By Admin</span>
+                            <span><i class="fas fa-comments"></i> 8 Comments</span>
+                        </div>
+                        <h3><a href="#">First-Time Home Buyer's Complete Guide</a></h3>
+                        <p>Everything you need to know about buying your first home, from mortgages to closing costs.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest real estate news, property updates, and exclusive offers delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit" class="btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for any inquiries</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Our Office</h3>
+                            <p>123 Real Estate Ave, Suite 500<br>New York, NY 10001</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Phone Number</h3>
+                            <p>+1 (555) 123-4567</p>
+                            <p>+1 (555) 987-6543</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email Address</h3>
+                            <p>info@trustestate.com</p>
+                            <p>support@trustestate.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Working Hours</h3>
+                            <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <p>Saturday: 10:00 AM - 4:00 PM</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215573291234!2d-73.98784492416462!3d40.74844047138945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1689876543210!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About TrustEstate</h3>
+                    <p>TrustEstate is a leading real estate company dedicated to helping clients buy, sell, and rent properties with ease and confidence.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                        <li><a href="#agents">Agents</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Property Types</h3>
+                    <ul>
+                        <li><a href="#">Houses</a></li>
+                        <li><a href="#">Apartments</a></li>
+                        <li><a href="#">Commercial</a></li>
+                        <li><a href="#">Villas</a></li>
+                        <li><a href="#">Condos</a></li>
+                        <li><a href="#">Land</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="footer-newsletter">
+                        <input type="email" placeholder="Your Email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 TrustEstate. All Rights Reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
