@@ -4,10 +4,63 @@ import { validateAndFormatPhoneNumber } from "../utils/phoneUtils.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+// export const registerUser = async (req, res) => {
+//   try {
+//     const { firstName, lastName, email, password, confirmPassword, contactNumber, dob } = req.body;
+
+//     // Check required fields
+//     if (!firstName || !lastName || !email || !password || !confirmPassword || !contactNumber || !dob) {
+//       return res.status(400).json({ message: "All fields are required" });
+//     }
+
+//     // Check password confirmation
+//     if (password !== confirmPassword) {
+//       return res.status(400).json({ message: "Passwords do not match" });
+//     }
+
+//     // Check if user already exists
+//     const userExists = await User.findOne({ email });
+//     if (userExists) {
+//       return res.status(400).json({ message: "User already exists" });
+//     }
+
+//     // Validate & format phone number (Assuming your util handles invalid formats)
+//     const formattedPhone = validateAndFormatPhoneNumber(contactNumber);
+
+//     // Hash the password
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     // Create new user
+//     const user = await User.create({
+//       firstName,
+//       lastName,
+//       email,
+//       password: hashedPassword,
+//       contactNumber: formattedPhone,
+//       dob,
+//     });
+
+//     // Respond with success
+//     return res.status(201).json({
+//       message: "User registered successfully",
+//       user: {
+//         _id: user._id,
+//         email: user.email,
+//         firstName: user.firstName,
+//         lastName: user.lastName
+//       }
+//     });
+
+//   } catch (error) {
+//     console.error(error); // Useful for debugging
+//     return res.status(500).json({ message: "Server Error: " + error.message });
+//   }
+// };
 export const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, email, password, confirmPassword, contactNumber, dob } = req.body;
 
+    // Check required fields
     if (!firstName || !lastName || !email || !password || !confirmPassword || !contactNumber || !dob) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -23,14 +76,17 @@ export const registerUser = async (req, res) => {
 
     const formattedPhone = validateAndFormatPhoneNumber(contactNumber);
 
-    const user = await User.create({
+    // Create new user WITHOUT manual hashing
+    const user = new User({
       firstName,
       lastName,
       email,
-      password,
+      password,  // plain password, auto-hashed by pre-save hook
       contactNumber: formattedPhone,
-      dob,
+      dob
     });
+
+    await user.save();
 
     return res.status(201).json({
       message: "User registered successfully",
@@ -41,10 +97,13 @@ export const registerUser = async (req, res) => {
         lastName: user.lastName
       }
     });
+
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    console.error(error);
+    return res.status(500).json({ message: "Server Error: " + error.message });
   }
 };
+
 
 export const loginUser = async (req, res) => {
   try {

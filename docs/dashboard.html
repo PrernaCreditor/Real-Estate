@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustEstate| Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --primary-light: rgba(58, 134, 255, 0.1);
+            --primary-dark: #2667cc;
+            --secondary: #8338ec;
+            --secondary-light: rgba(131, 56, 236, 0.1);
+            --dark: #212529;
+            --darker: #1a1e21;
+            --light: #f8f9fa;
+            --lighter: #ffffff;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --dark: #f8f9fa;
+            --darker: #2a2f34;
+            --light: #212529;
+            --lighter: #2a2f34;
+            --light-gray: #343a40;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Glass Morphism Effect */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .sidebar {
+            background: rgba(42, 47, 52, 0.85);
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--gray);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--primary);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .notification-badge {
+            background: var(--secondary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            margin-left: auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+
+        /* Header - Sticky & Modern */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            position: sticky;
+            top: 0;
+            background: var(--light);
+            z-index: 50;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .welcome-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 2px var(--light), 0 0 0 4px var(--primary-light);
+        }
+
+        .welcome-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .welcome-text p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+            transform: rotate(30deg);
+        }
+
+        .notification-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .notification-btn:hover {
+            color: var(--primary);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-menu img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Stats Cards - Gradient & Glass Effect */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .stat-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .stat-icon.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .stat-icon.secondary {
+            background: linear-gradient(135deg, var(--secondary), #6a11cb);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+            color: #4caf50;
+            font-weight: 500;
+        }
+
+        .stat-change.negative {
+            color: #f44336;
+        }
+
+        /* Property Cards - Modern & Interactive */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .property-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .property-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .property-img-container {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .property-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .property-card:hover .property-img {
+            transform: scale(1.05);
+        }
+
+        .property-body {
+            padding: 1.25rem;
+        }
+
+        .property-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .property-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .property-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .property-features {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .feature i {
+            color: var(--primary);
+        }
+
+        .view-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Recommended Properties - Horizontal Scroll */
+        .recommended-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .dashboard {
+                grid-template-columns: 240px 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: fixed;
+                width: 280px;
+                left: -280px;
+                height: 100vh;
+                transition: var(--transition);
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-item {
+                flex: 0 0 85%;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span>TrustEstate</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-heart"></i>
+                        <span>Saved Properties</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-list"></i>
+                        <span>My Listings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Messages</span>
+                        <span class="notification-badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Appointments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="welcome-section">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img">
+                    <div class="welcome-text">
+                        <h1>Welcome back, John!</h1>
+                        <p>Here's your real estate dashboard</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+                    <div class="user-menu">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Saved Properties</span>
+                        <div class="stat-icon primary">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-change">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+2 this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">My Listings</span>
+                        <div class="stat-icon secondary">
+                            <i class="fas fa-home"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>-1 this month</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Messages</span>
+                        <div class="stat-icon primary">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-change">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+1 today</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Appointments</span>
+                        <div class="stat-icon secondary">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">2</div>
+                    <div class="stat-change">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+1 upcoming</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved Properties Section -->
+            <section class="saved-properties">
+                <h2 class="section-title">
+                    <i class="fas fa-heart"></i>
+                    <span>Saved Properties</span>
+                </h2>
+                <div class="properties-grid">
+                    <!-- Property 1 -->
+                    <div class="property-card">
+                        <div class="property-img-container">
+                            <span class="property-badge">Featured</span>
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Property" class="property-img">
+                        </div>
+                        <div class="property-body">
+                            <h3 class="property-title">Modern Villa with Pool</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Beverly Hills, CA</span>
+                            </div>
+                            <div class="property-price">$1,250,000</div>
+                            <div class="property-footer">
+                                <div class="property-features">
+                                    <div class="feature">
+                                        <i class="fas fa-bed"></i>
+                                        <span>4 Beds</span>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-bath"></i>
+                                        <span>3 Baths</span>
+                                    </div>
+                                </div>
+                                <button class="view-btn">
+                                    <span>View</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 2 -->
+                    <div class="property-card">
+                        <div class="property-img-container">
+                            <span class="property-badge">New</span>
+                            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Property" class="property-img">
+                        </div>
+                        <div class="property-body">
+                            <h3 class="property-title">Luxury Penthouse</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Manhattan, NY</span>
+                            </div>
+                            <div class="property-price">$2,750,000</div>
+                            <div class="property-footer">
+                                <div class="property-features">
+                                    <div class="feature">
+                                        <i class="fas fa-bed"></i>
+                                        <span>3 Beds</span>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-bath"></i>
+                                        <span>2 Baths</span>
+                                    </div>
+                                </div>
+                                <button class="view-btn">
+                                    <span>View</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 3 -->
+                    <div class="property-card">
+                        <div class="property-img-container">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Property" class="property-img">
+                        </div>
+                        <div class="property-body">
+                            <h3 class="property-title">Contemporary Townhouse</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Austin, TX</span>
+                            </div>
+                            <div class="property-price">$850,000</div>
+                            <div class="property-footer">
+                                <div class="property-features">
+                                    <div class="feature">
+                                        <i class="fas fa-bed"></i>
+                                        <span>3 Beds</span>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-bath"></i>
+                                        <span>2.5 Baths</span>
+                                    </div>
+                                </div>
+                                <button class="view-btn">
+                                    <span>View</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommended Properties -->
+            <section class="recommended-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    <span>Recommended For You</span>
+                </h2>
+                <div class="carousel-container">
+                    <!-- Recommended 1 -->
+                    <div class="carousel-item">
+                        <div class="property-card">
+                            <div class="property-img-container">
+                                <span class="property-badge">Hot Deal</span>
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Property" class="property-img">
+                            </div>
+                            <div class="property-body">
+                                <h3 class="property-title">Suburban Family Home</h3>
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Portland, OR</span>
+                                </div>
+                                <div class="property-price">$675,000</div>
+                                <div class="property-footer">
+                                    <div class="property-features">
+                                        <div class="feature">
+                                            <i class="fas fa-bed"></i>
+                                            <span>4 Beds</span>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-bath"></i>
+                                            <span>3 Baths</span>
+                                        </div>
+                                    </div>
+                                    <button class="view-btn">
+                                        <span>View</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommended 2 -->
+                    <div class="carousel-item">
+                        <div class="property-card">
+                            <div class="property-img-container">
+                                <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Property" class="property-img">
+                            </div>
+                            <div class="property-body">
+                                <h3 class="property-title">Modern Loft Apartment</h3>
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Chicago, IL</span>
+                                </div>
+                                <div class="property-price">$1,100,000</div>
+                                <div class="property-footer">
+                                    <div class="property-features">
+                                        <div class="feature">
+                                            <i class="fas fa-bed"></i>
+                                            <span>2 Beds</span>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-bath"></i>
+                                            <span>2 Baths</span>
+                                        </div>
+                                    </div>
+                                    <button class="view-btn">
+                                        <span>View</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommended 3 -->
+                    <div class="carousel-item">
+                        <div class="property-card">
+                            <div class="property-img-container">
+                                <span class="property-badge">Luxury</span>
+                                <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Property" class="property-img">
+                            </div>
+                            <div class="property-body">
+                                <h3 class="property-title">Beachfront Cottage</h3>
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Miami, FL</span>
+                                </div>
+                                <div class="property-price">$1,950,000</div>
+                                <div class="property-footer">
+                                    <div class="property-features">
+                                        <div class="feature">
+                                            <i class="fas fa-bed"></i>
+                                            <span>3 Beds</span>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-bath"></i>
+                                            <span>2 Baths</span>
+                                        </div>
+                                    </div>
+                                    <button class="view-btn">
+                                        <span>View</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+        // Smooth navigation active state
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Mobile sidebar toggle (if needed)
+        const sidebar = document.querySelector('.sidebar');
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.sidebar-toggle')) {
+                sidebar.classList.toggle('active');
+            }
+        });
+    </script>
+</body>
+</html>

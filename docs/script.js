@@ -96,29 +96,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Stats Counter Animation
     const statNumbers = document.querySelectorAll('.stat-number');
-    const statsSection = document.querySelector('.stats');
-    
-    function animateStats() {
-        const statsPosition = statsSection.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
-        
-        if (statsPosition < screenPosition) {
-            statNumbers.forEach(stat => {
-                const target = +stat.getAttribute('data-count');
-                const count = +stat.innerText;
-                const increment = target / 100;
-                
-                if (count < target) {
-                    stat.innerText = Math.ceil(count + increment);
-                    setTimeout(animateStats, 10);
-                } else {
-                    stat.innerText = target;
-                }
-            });
-        }
+const statsSection = document.querySelector('.stats');
+
+function animateStats() {
+    if (!statsSection) return; // Exit if statsSection not found
+
+    const statsPosition = statsSection.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.3;
+
+    if (statsPosition < screenPosition) {
+        statNumbers.forEach(stat => {
+            const target = +stat.getAttribute('data-count');
+            const count = +stat.innerText;
+            const increment = target / 100;
+
+            if (count < target) {
+                stat.innerText = Math.ceil(count + increment);
+                setTimeout(animateStats, 10);
+            } else {
+                stat.innerText = target;
+            }
+        });
     }
-    
-    window.addEventListener('scroll', animateStats);
+}
+
+window.addEventListener('scroll', animateStats);
+
 
     // Back to Top Button
     const backToTopBtn = document.querySelector('.back-to-top');
@@ -180,4 +183,123 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize AOS (Animate On Scroll) if you want to add more animations
     // AOS.init();
+});
+
+//Login setup
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+const showRegister = document.getElementById('showRegister');
+const showLogin = document.getElementById('showLogin');
+
+// Smooth Form Toggle
+showRegister.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginForm.style.display = 'none';
+    registerForm.style.display = 'block';
+});
+
+showLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    registerForm.style.display = 'none';
+    loginForm.style.display = 'block';
+});
+
+// Register Functionality
+registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const firstName = document.getElementById('registerFirstName').value.trim();
+    const lastName = document.getElementById('registerLastName').value.trim();
+    const email = document.getElementById('registerEmail').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+    const phone = document.getElementById('registerPhone').value.trim();
+    const dob = document.getElementById('registerDob').value;
+
+    // ✅ Check if all fields are filled
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !phone || !dob) {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    // ✅ Confirm passwords match
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    // ✅ Check in console what is being sent
+    console.log({
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+        contactNumber: phone,
+        dob
+    });
+
+    try {
+        const res = await fetch('http://localhost:8000/api/auth/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                firstName,
+                lastName,
+                email,
+                password,
+                confirmPassword,
+                contactNumber: phone,  // ✅ Correct key name for backend
+                dob
+            })
+        });
+
+        const data = await res.json();
+        console.log("Response from backend:", data);
+
+        if (res.ok) {
+            alert("Registration successful! You can login now.");
+            registerForm.reset();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        } else {
+            alert(data.message || "Registration failed.");
+        }
+    } catch (err) {
+        alert("Server error.");
+        console.error(err);
+    }
+});
+
+
+// Login Functionality
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    console.log({ email, password }); // Debug: Ensure correct values
+
+    try {
+        const res = await fetch('http://localhost:8000/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        console.log("Response from backend:", data); // Debug response
+
+        if (res.ok) {
+            alert("Login successful! Redirecting...");
+            localStorage.setItem('token', data.accessToken); // Use accessToken returned by backend
+            window.location.href = "dashboard.html";
+        } else {
+            alert(data.message || "Invalid credentials.");
+        }
+    } catch (err) {
+        alert("Server error.");
+        console.error(err);
+    }
 });

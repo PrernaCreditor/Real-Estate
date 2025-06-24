@@ -33,24 +33,43 @@
     </header>
 
     <!-- Login Form -->
-    <div class="login-form-container">
-        <span class="fas fa-times" id="close-login-form"></span>
-        <form action="">
-            <h3>User Login</h3>
-            <input type="email" placeholder="Email" class="box">
-            <input type="password" placeholder="Password" class="box">
-            <p>Don't have an account? <a href="#">Register here</a></p>
-            <input type="submit" value="Login" class="btn">
-            <div class="social-login">
-                <p>Or login with</p>
-                <div class="social-icons">
-                    <a href="#" class="fab fa-google"></a>
-                    <a href="#" class="fab fa-facebook-f"></a>
-                    <a href="#" class="fab fa-twitter"></a>
-                </div>
+   <div class="login-form-container">
+    <span class="fas fa-times" id="close-login-form"></span>
+
+    <!-- Login Form -->
+    <form id="loginForm">
+        <h3>User Login</h3>
+        <input type="email" id="loginEmail" placeholder="Email" class="box" required>
+        <input type="password" id="loginPassword" placeholder="Password" class="box" required>
+        <p>Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+        <input type="submit" value="Login" class="btn">
+        <div class="social-login">
+            <p>Or login with</p>
+            <div class="social-icons">
+                <a href="#" class="fab fa-google"></a>
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+
+    <!-- Register Form (Hidden Initially) -->
+  <form id="registerForm" style="display:none;">
+    <h3>User Registration</h3>
+
+    <input type="text" id="registerFirstName" placeholder="First Name" class="box" required>
+    <input type="text" id="registerLastName" placeholder="Last Name" class="box" required>
+    <input type="email" id="registerEmail" placeholder="Email" class="box" required>
+    <input type="password" id="registerPassword" placeholder="Password" class="box" required>
+    <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" class="box" required>
+    <input type="text" id="registerPhone" placeholder="Contact Number" class="box" required>
+    <input type="date" id="registerDob" placeholder="Date of Birth" class="box" required>
+
+    <p>Already have an account? <a href="#" id="showLogin">Login here</a></p>
+    <input type="submit" value="Register" class="btn">
+</form>
+
+</div>
 
     <!-- Search Form -->
     <div class="search-form-container">
